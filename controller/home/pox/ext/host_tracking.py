@@ -1,68 +1,43 @@
-import pox.openflow.libopenflow_01 as of
 from pox.core import core
-from pox.lib.recoco import Timer
 from pox.lib.revent.revent import EventMixin
 from pox.lib.revent.revent import Event
 from pox.lib.addresses import EthAddr
-from pox.lib.packet.ethernet import ethernet
-from pox.lib.packet.arp import arp
-from pox.lib.packet.lldp import lldp
-from pox.lib.util import dpidToStr
-import time
 
-class UserIsMoving(Event):
-    def __init__ (self, packet, switch, interface):
+class PositionChanged(Event):
+    def __init__ (self, packet, switch, interface, connection):
         self.packet = packet
         self.switch = switch
         self.interface = interface
+        self.connection = connection
 
 class HostTracking(EventMixin):
     
-    _eventMixin_events = set([UserIsMoving])
+    _eventMixin_events = set([PositionChanged])
     
     def __init__(self):
-        self.position = None
+        self.last_ip_connection = None
+        self.last_connection = None
         core.openflow.addListeners(self)
         
     def _handle_PacketIn(self, event):
         packet = event.parsed
-        linksList = core.LinkDiscovery.links
-        switches = core.LinkDiscovery.switches
+        
+        switches = core.LinkDiscovery.switches.values()
+        links = core.LinkDiscovery.links.values()
+
         if packet.src != EthAddr("00:11:22:33:44:55"):
-            dpid = event.connection.dpid
+            dpid = event.connection.dpid  
+            current_switch = next(switch for switch in switches if switch.dpid == dpid)
+            current_interface = event.port
 
-            current_switch = None
-            for sw in switches:
-                if switches[sw].dpid == dpid:
-                    current_switch = switches[sw]
-                    
-            interface = event.port
-            
-            discovered = set()
-            for link in core.LinkDiscovery.links:
-                t = (core.LinkDiscovery.links[link].sid1, core.LinkDiscovery.links[link].port1)
-                discovered.add(t)
-
-            discovered.add(('s5', 2))
-            tup = (current_switch.name, interface)
-            if tup not in discovered:
-                print(f"Mobile host is connected to {current_switch.name}, on the interface {interface-1}")
-                if tup != self.position:
-                    print("host has changed its position")
-                    self.position = tup
-                    self.raiseEvent(UserIsMoving(packet, current_switch, interface))
-
-            pktOut = of.ofp_packet_out()
-
-            if event.ofp.buffer_id is not None:
-                pktOut.buffer_id = event.ofp.buffer_id
-                pktOut.in_port = event.port
-            else:
-                pktOut.data = event.ofp
-         
-            action = of.ofp_action_output(port = of.OFPP_TABLE)
-            pktOut.actions.append(action)
-            event.connection.send(pktOut)
+            #exept for s2, if not a link, then connection from outside
+            not_a_link = current_switch.name != "s2" or all((link.sid1 != current_switch.name and link.port1 != current_interface) for link in links)
+            current_connection = (current_switch.name, current_interface)
+            if  not_a_link:
+                if (current_connection != self.last_connection):
+                    print(f"A mobile connected to {current_switch.name}, on the interface {current_interface}")
+                    self.last_connection = current_connection
+                    self.raiseEvent(PositionChanged(packet, current_switch, current_interface, event.connection))
 
 
 def launch ():

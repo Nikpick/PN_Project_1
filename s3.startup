@@ -7,4 +7,5 @@ ovs-vsctl add-port s3 eth1
 ovs-vsctl add-port s3 eth3
 ovs-vsctl add-port s3 eth4
 
-ovs-vsctl set-controller s3 tcp:20.0.1.100
+ovs-vsctl set bridge s3 protocols=OpenFlow10
+ovs-vsctl set-controller s3 tcp:20.0.1.100:6633

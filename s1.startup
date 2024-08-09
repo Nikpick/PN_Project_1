@@ -5,4 +5,5 @@ ovs-vsctl add-br s1
 ovs-vsctl add-port s1 eth0
 ovs-vsctl add-port s1 eth1
 
-ovs-vsctl set-controller s1 tcp:20.0.1.100
+ovs-vsctl set bridge s1 protocols=OpenFlow10
+ovs-vsctl set-controller s1 tcp:20.0.1.100:6633
