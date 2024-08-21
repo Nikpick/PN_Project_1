@@ -45,7 +45,7 @@ class User_mobility():
 					self.del_flow_rule(switch_id[p+1].dpid, True)
 					self.del_flow_rule(switch_id[p+1].dpid, False)
 
-			print("Tutte le regole del flow precedente cancellate")
+			print("All the previous rules were deleted")
 
 
 		# Retrieve switches from the dictionary
