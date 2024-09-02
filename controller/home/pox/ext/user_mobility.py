@@ -33,7 +33,7 @@ class User_mobility():
 
 		
 
-		#if there was a previous path before, at the first we remove the rule to the cabinet and all rules that are not in the new path
+		#if there was a previous path before, at the first we remove the rule to the mobile and all rules that are not in the new path
 		if self.previous_path is not None:
 			old_first_switch = switch_id[self.previous_path[0]+1]
 			print("I'm " + old_first_switch.name +" and I'm the first of the previous path")
@@ -89,18 +89,19 @@ class User_mobility():
 				if (pre_switch.sid-1 in self.previous_path) or (post_switch.sid-1 in self.previous_path):
 					if (pre_switch.sid-1 in self.previous_path):
 						self.mod_flow_rule(pre_switch.dpid, out_port1 ,False) #if it is the first, change to gw
-						self.mod_flow_rule(post_switch.dpid, out_port2 ,True)
+						self.add_flow_rule(post_switch.dpid, out_port2 ,True)
 						print("Only pre switch in previous path")
+						continue
 					else:
 						self.mod_flow_rule(post_switch.dpid, out_port2 ,True) #if it is the second change to mobile
-						self.mod_flow_rule(pre_switch.dpid, out_port1 ,False)
+						self.add_flow_rule(pre_switch.dpid, out_port1 ,False)
 						print("Only post switch in previous path")
 						continue
 			
 			print("Adding all the missing rules")
 			#if not add the return rules
-			self.mod_flow_rule(pre_switch.dpid, out_port1 ,False)
-			self.mod_flow_rule(post_switch.dpid, out_port2 ,True)
+			self.add_flow_rule(pre_switch.dpid, out_port1 ,False)
+			self.add_flow_rule(post_switch.dpid, out_port2 ,True)
 
 		
 		self.previous_path = path

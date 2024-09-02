@@ -87,7 +87,7 @@ class linkDiscovery():
 			switch = self.switches[switch_name]
 			dpid = switch.dpid
 			for port in switch.ports:
-				if port.port_no != 65534:
+				if port.port_no != 6633:
 					mac_src = EthAddr("00:11:22:33:44:55")
 					mac_dst = EthAddr("00:00:00:00:" + str(switch.sid) + ":" + str(port.port_no))
 					ether = ethernet()
@@ -113,7 +113,6 @@ class linkDiscovery():
 	def getGraph(self, previous_path=None):
 		N = len(self.switches)
 		adj = np.zeros((N, N))
-		max_weight = 0
 		if previous_path is not None:
 			for link in self.links.values():
 				sid1 = int(link.sid1)-1
@@ -135,11 +134,9 @@ class linkDiscovery():
 						nodes += pos #amount of nodes to reconfigure depends on the position of one of the node in the previous path
 						
 						adj[sid1, sid2] = nodes
-						
-						if max_weight < nodes:
-							max_weight = nodes
 					else:
-						adj[sid1, sid2] = max_weight
+						#if link not in previous path, infinite weight
+						adj[sid1, sid2] = float('inf')
 		else:
 			for link in self.links.values():
 				adj[int(link.sid1)-1, int(link.sid2)-1] = 0.1
