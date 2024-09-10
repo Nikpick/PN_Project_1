@@ -7,3 +7,5 @@ pip install networkx --break-system-packages
 pip install numpy --break-system-packages
 
 echo "./home/pox/pox.py topology_discovery host_tracking fake_gateway user_mobility"
+
+alias start='./home/pox/pox.py topology_discovery host_tracking fake_gateway user_mobility'

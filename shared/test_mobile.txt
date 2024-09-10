@@ -1,0 +1,211 @@
+--- Startup Commands Log
+++ ip addr add 10.0.1.1/16 dev eth0
+++ ip addr add 10.0.1.2/16 dev eth1
+++ ip addr add 10.0.1.3/16 dev eth2
+++ ip addr add 10.0.1.4/16 dev eth3
+++ ip route add default via 10.0.2.1 dev eth0
+++ alias 'test=ping 30.0.3.1'
+--- End Startup Commands Log
+root@mobile:/# ping 10.0.2.1 -I eth0
+PING 10.0.2.1 (10.0.2.1) from 10.0.1.1 eth0: 56(84) bytes of data.
+64 bytes from 10.0.2.1: icmp_seq=1 ttl=64 time=57.3 ms
+64 bytes from 10.0.2.1: icmp_seq=2 ttl=64 time=2.90 ms
+64 bytes from 10.0.2.1: icmp_seq=3 ttl=64 time=2.76 ms
+64 bytes from 10.0.2.1: icmp_seq=4 ttl=64 time=2.17 ms
+^C
+--- 10.0.2.1 ping statistics ---
+4 packets transmitted, 4 received, 0% packet loss, time 3016ms
+rtt min/avg/max/mdev = 2.170/16.288/57.329/23.696 ms
+root@mobile:/# ping 10.0.2.1 -I eth1
+PING 10.0.2.1 (10.0.2.1) from 10.0.1.2 eth1: 56(84) bytes of data.
+64 bytes from 10.0.2.1: icmp_seq=1 ttl=64 time=51.6 ms
+64 bytes from 10.0.2.1: icmp_seq=2 ttl=64 time=1.81 ms
+64 bytes from 10.0.2.1: icmp_seq=3 ttl=64 time=3.54 ms
+^C
+--- 10.0.2.1 ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2008ms
+rtt min/avg/max/mdev = 1.809/18.995/51.636/23.091 ms
+root@mobile:/# ping 10.0.2.1 -I eth2
+PING 10.0.2.1 (10.0.2.1) from 10.0.1.3 eth2: 56(84) bytes of data.
+64 bytes from 10.0.2.1: icmp_seq=1 ttl=64 time=50.3 ms
+64 bytes from 10.0.2.1: icmp_seq=2 ttl=64 time=1.22 ms
+^C
+--- 10.0.2.1 ping statistics ---
+2 packets transmitted, 2 received, 0% packet loss, time 1003ms
+rtt min/avg/max/mdev = 1.218/25.779/50.340/24.561 ms
+root@mobile:/# ping 10.0.2.1 -I eth3
+PING 10.0.2.1 (10.0.2.1) from 10.0.1.4 eth3: 56(84) bytes of data.
+64 bytes from 10.0.2.1: icmp_seq=1 ttl=64 time=59.9 ms
+64 bytes from 10.0.2.1: icmp_seq=2 ttl=64 time=1.81 ms
+64 bytes from 10.0.2.1: icmp_seq=3 ttl=64 time=3.09 ms
+^C
+--- 10.0.2.1 ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2008ms
+rtt min/avg/max/mdev = 1.814/21.606/59.920/27.096 ms
+root@mobile:/# ping 10.0.2.1 -I eth1
+PING 10.0.2.1 (10.0.2.1) from 10.0.1.2 eth1: 56(84) bytes of data.
+64 bytes from 10.0.2.1: icmp_seq=2 ttl=64 time=4.14 ms
+64 bytes from 10.0.2.1: icmp_seq=3 ttl=64 time=3.02 ms
+64 bytes from 10.0.2.1: icmp_seq=4 ttl=64 time=2.78 ms
+^C
+--- 10.0.2.1 ping statistics ---
+4 packets transmitted, 3 received, 25% packet loss, time 3036ms
+rtt min/avg/max/mdev = 2.780/3.313/4.138/0.591 ms
+root@mobile:/# ping 10.0.2.1 -I eth0
+PING 10.0.2.1 (10.0.2.1) from 10.0.1.1 eth0: 56(84) bytes of data.
+64 bytes from 10.0.2.1: icmp_seq=2 ttl=64 time=4.00 ms
+64 bytes from 10.0.2.1: icmp_seq=3 ttl=64 time=3.51 ms
+64 bytes from 10.0.2.1: icmp_seq=4 ttl=64 time=3.23 ms
+64 bytes from 10.0.2.1: icmp_seq=5 ttl=64 time=3.10 ms
+^C
+--- 10.0.2.1 ping statistics ---
+5 packets transmitted, 4 received, 20% packet loss, time 4030ms
+rtt min/avg/max/mdev = 3.096/3.459/3.997/0.344 ms
+root@mobile:/# ping 10.0.2.1 -I eth3
+PING 10.0.2.1 (10.0.2.1) from 10.0.1.4 eth3: 56(84) bytes of data.
+64 bytes from 10.0.2.1: icmp_seq=2 ttl=64 time=5.23 ms
+64 bytes from 10.0.2.1: icmp_seq=3 ttl=64 time=1.62 ms
+^C
+--- 10.0.2.1 ping statistics ---
+3 packets transmitted, 2 received, 33.3333% packet loss, time 2010ms
+rtt min/avg/max/mdev = 1.619/3.422/5.226/1.803 ms
+root@mobile:/# ping 30.0.3.2
+PING 30.0.3.2 (30.0.3.2) 56(84) bytes of data.
+64 bytes from 30.0.3.2: icmp_seq=10 ttl=63 time=9.08 ms
+64 bytes from 30.0.3.2: icmp_seq=11 ttl=63 time=3.95 ms
+64 bytes from 30.0.3.2: icmp_seq=12 ttl=63 time=1.50 ms
+64 bytes from 30.0.3.2: icmp_seq=13 ttl=63 time=2.72 ms
+64 bytes from 30.0.3.2: icmp_seq=14 ttl=63 time=3.39 ms
+64 bytes from 30.0.3.2: icmp_seq=15 ttl=63 time=3.38 ms
+^C
+--- 30.0.3.2 ping statistics ---
+15 packets transmitted, 6 received, 60% packet loss, time 14226ms
+rtt min/avg/max/mdev = 1.496/4.001/9.078/2.396 ms
+root@mobile:/# ip route
+default via 10.0.2.1 dev eth0 
+10.0.0.0/16 dev eth0 proto kernel scope link src 10.0.1.1 
+10.0.0.0/16 dev eth1 proto kernel scope link src 10.0.1.2 
+10.0.0.0/16 dev eth2 proto kernel scope link src 10.0.1.3 
+10.0.0.0/16 dev eth3 proto kernel scope link src 10.0.1.4 
+root@mobile:/# ip route del default
+root@mobile:/# ip route
+10.0.0.0/16 dev eth0 proto kernel scope link src 10.0.1.1 
+10.0.0.0/16 dev eth1 proto kernel scope link src 10.0.1.2 
+10.0.0.0/16 dev eth2 proto kernel scope link src 10.0.1.3 
+10.0.0.0/16 dev eth3 proto kernel scope link src 10.0.1.4 
+root@mobile:/# ip route add default via 10.0.2.1 dev eth3
+root@mobile:/# ping 30.0.3.2
+PING 30.0.3.2 (30.0.3.2) 56(84) bytes of data.
+64 bytes from 30.0.3.2: icmp_seq=2 ttl=63 time=5.42 ms
+64 bytes from 30.0.3.2: icmp_seq=3 ttl=63 time=3.47 ms
+^C
+--- 30.0.3.2 ping statistics ---
+3 packets transmitted, 2 received, 33.3333% packet loss, time 2038ms
+rtt min/avg/max/mdev = 3.468/4.441/5.415/0.973 ms
+root@mobile:/# ip route del default
+root@mobile:/# ip route add default via 10.0.2.1 dev eth0
+root@mobile:/# ping 30.0.3.2
+PING 30.0.3.2 (30.0.3.2) 56(84) bytes of data.
+64 bytes from 30.0.3.2: icmp_seq=10 ttl=63 time=53.8 ms
+64 bytes from 30.0.3.2: icmp_seq=11 ttl=63 time=3.44 ms
+64 bytes from 30.0.3.2: icmp_seq=12 ttl=63 time=3.05 ms
+64 bytes from 30.0.3.2: icmp_seq=13 ttl=63 time=4.25 ms
+^C
+--- 30.0.3.2 ping statistics ---
+13 packets transmitted, 4 received, 69.2308% packet loss, time 12238ms
+rtt min/avg/max/mdev = 3.051/16.146/53.849/21.771 ms
+root@mobile:/# arp -a
+? (10.0.2.1) at 00:00:00:00:00:01 [ether] on eth2
+? (10.0.2.1) at 00:00:00:00:00:01 [ether] on eth0
+? (10.0.2.1) at 00:00:00:00:00:01 [ether] on eth1
+? (10.0.2.1) at 00:00:00:00:00:01 [ether] on eth3
+root@mobile:/# arp -h
+Usage:
+  arp [-vn]  [<HW>] [-i <if>] [-a] [<hostname>]             <-Display ARP cache
+  arp [-v]          [-i <if>] -d  <host> [pub]               <-Delete ARP entry
+  arp [-vnD] [<HW>] [-i <if>] -f  [<filename>]            <-Add entry from file
+  arp [-v]   [<HW>] [-i <if>] -s  <host> <hwaddr> [temp]            <-Add entry
+  arp [-v]   [<HW>] [-i <if>] -Ds <host> <if> [netmask <nm>] pub          <-''-
+
+        -a                       display (all) hosts in alternative (BSD) style
+        -e                       display (all) hosts in default (Linux) style
+        -s, --set                set a new ARP entry
+        -d, --delete             delete a specified entry
+        -v, --verbose            be verbose
+        -n, --numeric            don't resolve names
+        -i, --device             specify network interface (e.g. eth0)
+        -D, --use-device         read <hwaddr> from given device
+        -A, -p, --protocol       specify protocol family
+        -f, --file               read new entries from file or from /etc/ethers
+
+  <HW>=Use '-H <hw>' to specify hardware address type. Default: ether
+  List of possible hardware types (which support ARP):
+    ash (Ash) ether (Ethernet) ax25 (AMPR AX.25) 
+    netrom (AMPR NET/ROM) rose (AMPR ROSE) arcnet (ARCnet) 
+    dlci (Frame Relay DLCI) fddi (Fiber Distributed Data Interface) hippi (HIPPI) 
+    irda (IrLAP) x25 (generic X.25) eui64 (Generic EUI-64) 
+root@mobile:/# arp -d 1
+SIOCDARP(dontpub): Network is unreachable
+root@mobile:/# arp -a
+? (10.0.2.1) at 00:00:00:00:00:01 [ether] on eth2
+? (10.0.2.1) at 00:00:00:00:00:01 [ether] on eth0
+? (10.0.2.1) at 00:00:00:00:00:01 [ether] on eth1
+? (10.0.2.1) at 00:00:00:00:00:01 [ether] on eth3
+root@mobile:/# arp -d -a
+? (10.0.2.1) at 00:00:00:00:00:01 [ether] on eth2
+? (10.0.2.1) at 00:00:00:00:00:01 [ether] on eth0
+? (10.0.2.1) at 00:00:00:00:00:01 [ether] on eth1
+? (10.0.2.1) at 00:00:00:00:00:01 [ether] on eth3
+root@mobile:/# arp -a
+? (10.0.2.1) at 00:00:00:00:00:01 [ether] on eth2
+? (10.0.2.1) at 00:00:00:00:00:01 [ether] on eth0
+? (10.0.2.1) at 00:00:00:00:00:01 [ether] on eth1
+? (10.0.2.1) at 00:00:00:00:00:01 [ether] on eth3
+root@mobile:/# arp -a -d
+arp: need host name
+root@mobile:/# arp -a
+? (10.0.2.1) at 00:00:00:00:00:01 [ether] on eth2
+? (10.0.2.1) at 00:00:00:00:00:01 [ether] on eth0
+? (10.0.2.1) at 00:00:00:00:00:01 [ether] on eth1
+? (10.0.2.1) at 00:00:00:00:00:01 [ether] on eth3
+root@mobile:/# arp -d 10.0.2.1
+root@mobile:/# arp -a
+? (10.0.2.1) at 00:00:00:00:00:01 [ether] on eth2
+? (10.0.2.1) at 00:00:00:00:00:01 [ether] on eth1
+? (10.0.2.1) at 00:00:00:00:00:01 [ether] on eth3
+root@mobile:/# arp -d 10.0.2.1
+No ARP entry for 10.0.2.1
+root@mobile:/# arp -d 10.0.2.1
+No ARP entry for 10.0.2.1
+root@mobile:/# arp -d 10.0.2.1
+No ARP entry for 10.0.2.1
+root@mobile:/# arp -a
+? (10.0.2.1) at 00:00:00:00:00:01 [ether] on eth2
+? (10.0.2.1) at 00:00:00:00:00:01 [ether] on eth1
+? (10.0.2.1) at 00:00:00:00:00:01 [ether] on eth3
+root@mobile:/# arp -a 10.0.2.1
+? (10.0.2.1) at 00:00:00:00:00:01 [ether] on eth2
+? (10.0.2.1) at 00:00:00:00:00:01 [ether] on eth1
+? (10.0.2.1) at 00:00:00:00:00:01 [ether] on eth3
+root@mobile:/# arp -a 10.0.2.1 -d
+No ARP entry for 10.0.2.1
+root@mobile:/# ip route
+default via 10.0.2.1 dev eth0 
+10.0.0.0/16 dev eth0 proto kernel scope link src 10.0.1.1 
+10.0.0.0/16 dev eth1 proto kernel scope link src 10.0.1.2 
+10.0.0.0/16 dev eth2 proto kernel scope link src 10.0.1.3 
+10.0.0.0/16 dev eth3 proto kernel scope link src 10.0.1.4 
+root@mobile:/# ping 30.0.3.2
+PING 30.0.3.2 (30.0.3.2) 56(84) bytes of data.
+64 bytes from 30.0.3.2: icmp_seq=1 ttl=63 time=8.23 ms
+64 bytes from 30.0.3.2: icmp_seq=2 ttl=63 time=3.58 ms
+^C
+--- 30.0.3.2 ping statistics ---
+2 packets transmitted, 2 received, 0% packet loss, time 1006ms
+rtt min/avg/max/mdev = 3.581/5.906/8.231/2.325 ms
+root@mobile:/# arp -a
+? (10.0.2.1) at 00:00:00:00:00:01 [ether] on eth0
+? (10.0.2.1) at 00:00:00:00:00:01 [ether] on eth2
+? (10.0.2.1) at 00:00:00:00:00:01 [ether] on eth1
+? (10.0.2.1) at 00:00:00:00:00:01 [ether] on eth3
+root@mobile:/# 

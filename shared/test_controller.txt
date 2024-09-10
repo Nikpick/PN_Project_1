@@ -1,0 +1,580 @@
+Waiting startup commands execution. Press [ENTER] to override...
+--- Startup Commands Log
+++ ip addr add 20.0.1.100/24 dev eth0
+++ chmod +x /home/pox/pox.py
+++ pip install pox --break-system-packages
+Collecting pox
+  Downloading pox-0.3.4-py3-none-any.whl.metadata (8.0 kB)
+Downloading pox-0.3.4-py3-none-any.whl (29 kB)
+Installing collected packages: pox
+Successfully installed pox-0.3.4
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+
+[notice] A new release of pip is available: 24.0 -> 24.2
+[notice] To update, run: python3 -m pip install --upgrade pip
+++ pip install networkx --break-system-packages
+Collecting networkx
+  Downloading networkx-3.3-py3-none-any.whl.metadata (5.1 kB)
+Downloading networkx-3.3-py3-none-any.whl (1.7 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.7/1.7 MB 7.9 MB/s eta 0:00:00
+Installing collected packages: networkx
+Successfully installed networkx-3.3
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+
+[notice] A new release of pip is available: 24.0 -> 24.2
+[notice] To update, run: python3 -m pip install --upgrade pip
+++ pip install numpy --break-system-packages
+Collecting numpy
+  Downloading numpy-2.1.1-cp311-cp311-manylinux_2_17_aarch64.manylinux2014_aarch64.whl.metadata (62 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 62.0/62.0 kB 2.1 MB/s eta 0:00:00
+Downloading numpy-2.1.1-cp311-cp311-manylinux_2_17_aarch64.manylinux2014_aarch64.whl (14.0 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 14.0/14.0 MB 9.3 MB/s eta 0:00:00
+Installing collected packages: numpy
+Successfully installed numpy-2.1.1
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+
+[notice] A new release of pip is available: 24.0 -> 24.2
+[notice] To update, run: python3 -m pip install --upgrade pip
+++ echo './home/pox/pox.py topology_discovery host_tracking fake_gateway user_mobility'
+./home/pox/pox.py topology_discovery host_tracking fake_gateway user_mobility
+++ alias 'start=./home/pox/pox.py topology_discovery host_tracking fake_gateway user_mobility'
+--- End Startup Commands Log
+root@controller:/# start
+bash: start: command not found
+root@controller:/# start
+bash: start: command not found
+root@controller:/# ^C
+root@controller:/# ./home/pox/pox.py topology_discovery host_tracking fake_gateway user_mobility
+POX 0.7.0 (gar) / Copyright 2011-2020 James McCauley, et al.
+WARNING:version:POX requires one of the following versions of Python: 3.6 3.7 3.8 3.9
+WARNING:version:You're running Python 3.11.
+WARNING:version:If you run into problems, try using a supported version.
+INFO:core:POX 0.7.0 (gar) is up.
+INFO:openflow.of_01:[e6-af-e4-89-d4-43 1] connected
+########################################################
+New switch:
+Switch:
+--->DPID: 253643127903299
+--->Name: s2
+--->Sid: 1
+--->Ports:
+------->Port:
+----------->Name: s2
+----------->Port No: 65534
+----------->HW Addr: e6:af:e4:89:d4:43
+------->Port:
+----------->Name: eth0
+----------->Port No: 1
+----------->HW Addr: 3a:74:03:48:15:a0
+------->Port:
+----------->Name: eth1
+----------->Port No: 2
+----------->HW Addr: ae:d9:c1:ab:4c:43
+------->Port:
+----------->Name: eth3
+----------->Port No: 3
+----------->HW Addr: b2:1b:b9:0b:6e:e2
+INFO:openflow.of_01:[ce-f9-41-c6-aa-4a 2] connected
+########################################################
+New switch:
+Switch:
+--->DPID: 227569945717322
+--->Name: s3
+--->Sid: 2
+--->Ports:
+------->Port:
+----------->Name: eth4
+----------->Port No: 4
+----------->HW Addr: 92:37:19:eb:3b:65
+------->Port:
+----------->Name: s3
+----------->Port No: 65534
+----------->HW Addr: ce:f9:41:c6:aa:4a
+------->Port:
+----------->Name: eth0
+----------->Port No: 1
+----------->HW Addr: 9e:69:b9:8b:60:8c
+------->Port:
+----------->Name: eth1
+----------->Port No: 2
+----------->HW Addr: da:6e:49:05:96:be
+------->Port:
+----------->Name: eth3
+----------->Port No: 3
+----------->HW Addr: a6:d0:db:7f:86:88
+INFO:openflow.of_01:[6e-5d-03-09-91-47 3] connected
+########################################################
+New switch:
+Switch:
+--->DPID: 121345761972551
+--->Name: s1
+--->Sid: 3
+--->Ports:
+------->Port:
+----------->Name: s1
+----------->Port No: 65534
+----------->HW Addr: 6e:5d:03:09:91:47
+------->Port:
+----------->Name: eth0
+----------->Port No: 1
+----------->HW Addr: d2:25:68:91:3f:d3
+------->Port:
+----------->Name: eth1
+----------->Port No: 2
+----------->HW Addr: e2:67:dd:75:b1:f3
+########################################################
+Discovered new link:
+--->Link:
+------->Name: s2_s3
+------->Sid1: 1
+------->Dpid1: e6-af-e4-89-d4-43
+------->Port1: 2
+------->Sid2: 2
+------->Dpid2: ce-f9-41-c6-aa-4a
+------->Port2: 1
+########################################################
+Discovered new link:
+--->Link:
+------->Name: s3_s2
+------->Sid1: 2
+------->Dpid1: ce-f9-41-c6-aa-4a
+------->Port1: 1
+------->Sid2: 1
+------->Dpid2: e6-af-e4-89-d4-43
+------->Port2: 2
+########################################################
+Discovered new link:
+--->Link:
+------->Name: s2_s1
+------->Sid1: 1
+------->Dpid1: e6-af-e4-89-d4-43
+------->Port1: 1
+------->Sid2: 3
+------->Dpid2: 6e-5d-03-09-91-47
+------->Port2: 1
+########################################################
+Discovered new link:
+--->Link:
+------->Name: s3_s1
+------->Sid1: 2
+------->Dpid1: ce-f9-41-c6-aa-4a
+------->Port1: 2
+------->Sid2: 3
+------->Dpid2: 6e-5d-03-09-91-47
+------->Port2: 2
+########################################################
+Discovered new link:
+--->Link:
+------->Name: s1_s2
+------->Sid1: 3
+------->Dpid1: 6e-5d-03-09-91-47
+------->Port1: 1
+------->Sid2: 1
+------->Dpid2: e6-af-e4-89-d4-43
+------->Port2: 1
+########################################################
+Discovered new link:
+--->Link:
+------->Name: s1_s3
+------->Sid1: 3
+------->Dpid1: 6e-5d-03-09-91-47
+------->Port1: 2
+------->Sid2: 2
+------->Dpid2: ce-f9-41-c6-aa-4a
+------->Port2: 2
+INFO:openflow.of_01:[2a-c4-e4-3c-c7-4b 4] connected
+########################################################
+New switch:
+Switch:
+--->DPID: 47025131145035
+--->Name: s4
+--->Sid: 4
+--->Ports:
+------->Port:
+----------->Name: eth4
+----------->Port No: 4
+----------->HW Addr: 62:eb:9d:b2:cc:9a
+------->Port:
+----------->Name: s4
+----------->Port No: 65534
+----------->HW Addr: 2a:c4:e4:3c:c7:4b
+------->Port:
+----------->Name: eth0
+----------->Port No: 1
+----------->HW Addr: 3a:c3:d1:83:42:fa
+------->Port:
+----------->Name: eth1
+----------->Port No: 2
+----------->HW Addr: 92:eb:df:6a:e7:e0
+------->Port:
+----------->Name: eth3
+----------->Port No: 3
+----------->HW Addr: ce:77:e7:46:69:8b
+########################################################
+Discovered new link:
+--->Link:
+------->Name: s4_s3
+------->Sid1: 4
+------->Dpid1: 2a-c4-e4-3c-c7-4b
+------->Port1: 1
+------->Sid2: 2
+------->Dpid2: ce-f9-41-c6-aa-4a
+------->Port2: 2
+########################################################
+Discovered new link:
+--->Link:
+------->Name: s4_s1
+------->Sid1: 4
+------->Dpid1: 2a-c4-e4-3c-c7-4b
+------->Port1: 2
+------->Sid2: 3
+------->Dpid2: 6e-5d-03-09-91-47
+------->Port2: 2
+########################################################
+Discovered new link:
+--->Link:
+------->Name: s3_s4
+------->Sid1: 2
+------->Dpid1: ce-f9-41-c6-aa-4a
+------->Port1: 2
+------->Sid2: 4
+------->Dpid2: 2a-c4-e4-3c-c7-4b
+------->Port2: 1
+########################################################
+Discovered new link:
+--->Link:
+------->Name: s1_s4
+------->Sid1: 3
+------->Dpid1: 6e-5d-03-09-91-47
+------->Port1: 2
+------->Sid2: 4
+------->Dpid2: 2a-c4-e4-3c-c7-4b
+------->Port2: 2
+s4_s3
+s4_s1
+True
+A mobile connected to s4, on the interface 3
+Graph with 4 nodes and 5 edges
+s4-s3-s2
+I am link:  s4_s3 1 2
+I'm the first one
+Adding all the missing rules
+I am link:  s3_s2 1 2
+I'm the last one
+Adding all the missing rules
+s4_s3
+s4_s1
+True
+A mobile connected to s4, on the interface 4
+Graph with 4 nodes and 5 edges
+s4-s3-s2
+I'm s4 and I'm the first of the previous path
+All the previous rules were deleted
+I am link:  s4_s3 1 2
+I'm the first one
+Bot in previous path
+I am link:  s3_s2 1 2
+Bot in previous path
+s3_s2
+s3_s1
+s3_s4
+True
+A mobile connected to s3, on the interface 3
+Graph with 4 nodes and 5 edges
+s3-s2
+I'm s4 and I'm the first of the previous path
+I'm s4 and I'm not in the new path
+All the previous rules were deleted
+I am link:  s3_s2 1 2
+I'm the first one
+Bot in previous path
+s3_s2
+s3_s1
+s3_s4
+True
+A mobile connected to s3, on the interface 4
+Graph with 4 nodes and 5 edges
+s3-s2
+I'm s3 and I'm the first of the previous path
+All the previous rules were deleted
+I am link:  s3_s2 1 2
+I'm the first one
+Bot in previous path
+s4_s3
+s4_s1
+True
+A mobile connected to s4, on the interface 4
+Graph with 4 nodes and 5 edges
+s4-s3-s2
+I'm s3 and I'm the first of the previous path
+All the previous rules were deleted
+I am link:  s4_s3 1 2
+I'm the first one
+Only post switch in previous path
+I am link:  s3_s2 1 2
+Bot in previous path
+^CINFO:core:Going down...
+INFO:openflow.of_01:[e6-af-e4-89-d4-43 1] disconnected
+INFO:openflow.of_01:[ce-f9-41-c6-aa-4a 2] disconnected
+INFO:openflow.of_01:[6e-5d-03-09-91-47 3] disconnected
+INFO:openflow.of_01:[2a-c4-e4-3c-c7-4b 4] disconnected
+INFO:core:Down.
+root@controller:/# ./home/pox/pox.py topology_discovery host_tracking fake_gateway user_mobility
+POX 0.7.0 (gar) / Copyright 2011-2020 James McCauley, et al.
+WARNING:version:POX requires one of the following versions of Python: 3.6 3.7 3.8 3.9
+WARNING:version:You're running Python 3.11.
+WARNING:version:If you run into problems, try using a supported version.
+INFO:core:POX 0.7.0 (gar) is up.
+INFO:openflow.of_01:[e6-af-e4-89-d4-43 2] connected
+########################################################
+New switch:
+Switch:
+--->DPID: 253643127903299
+--->Name: s2
+--->Sid: 1
+--->Ports:
+------->Port:
+----------->Name: s2
+----------->Port No: 65534
+----------->HW Addr: e6:af:e4:89:d4:43
+------->Port:
+----------->Name: eth0
+----------->Port No: 1
+----------->HW Addr: 3a:74:03:48:15:a0
+------->Port:
+----------->Name: eth1
+----------->Port No: 2
+----------->HW Addr: ae:d9:c1:ab:4c:43
+------->Port:
+----------->Name: eth3
+----------->Port No: 3
+----------->HW Addr: b2:1b:b9:0b:6e:e2
+INFO:openflow.of_01:[6e-5d-03-09-91-47 3] connected
+########################################################
+New switch:
+Switch:
+--->DPID: 121345761972551
+--->Name: s1
+--->Sid: 2
+--->Ports:
+------->Port:
+----------->Name: s1
+----------->Port No: 65534
+----------->HW Addr: 6e:5d:03:09:91:47
+------->Port:
+----------->Name: eth0
+----------->Port No: 1
+----------->HW Addr: d2:25:68:91:3f:d3
+------->Port:
+----------->Name: eth1
+----------->Port No: 2
+----------->HW Addr: e2:67:dd:75:b1:f3
+INFO:openflow.of_01:[ce-f9-41-c6-aa-4a 1] connected
+########################################################
+New switch:
+Switch:
+--->DPID: 227569945717322
+--->Name: s3
+--->Sid: 3
+--->Ports:
+------->Port:
+----------->Name: eth4
+----------->Port No: 4
+----------->HW Addr: 92:37:19:eb:3b:65
+------->Port:
+----------->Name: s3
+----------->Port No: 65534
+----------->HW Addr: ce:f9:41:c6:aa:4a
+------->Port:
+----------->Name: eth0
+----------->Port No: 1
+----------->HW Addr: 9e:69:b9:8b:60:8c
+------->Port:
+----------->Name: eth1
+----------->Port No: 2
+----------->HW Addr: da:6e:49:05:96:be
+------->Port:
+----------->Name: eth3
+----------->Port No: 3
+----------->HW Addr: a6:d0:db:7f:86:88
+INFO:openflow.of_01:[2a-c4-e4-3c-c7-4b 4] connected
+########################################################
+New switch:
+Switch:
+--->DPID: 47025131145035
+--->Name: s4
+--->Sid: 4
+--->Ports:
+------->Port:
+----------->Name: eth4
+----------->Port No: 4
+----------->HW Addr: 62:eb:9d:b2:cc:9a
+------->Port:
+----------->Name: s4
+----------->Port No: 65534
+----------->HW Addr: 2a:c4:e4:3c:c7:4b
+------->Port:
+----------->Name: eth0
+----------->Port No: 1
+----------->HW Addr: 3a:c3:d1:83:42:fa
+------->Port:
+----------->Name: eth1
+----------->Port No: 2
+----------->HW Addr: 92:eb:df:6a:e7:e0
+------->Port:
+----------->Name: eth3
+----------->Port No: 3
+----------->HW Addr: ce:77:e7:46:69:8b
+########################################################
+Discovered new link:
+--->Link:
+------->Name: s2_s1
+------->Sid1: 1
+------->Dpid1: e6-af-e4-89-d4-43
+------->Port1: 1
+------->Sid2: 2
+------->Dpid2: 6e-5d-03-09-91-47
+------->Port2: 1
+########################################################
+Discovered new link:
+--->Link:
+------->Name: s2_s3
+------->Sid1: 1
+------->Dpid1: e6-af-e4-89-d4-43
+------->Port1: 2
+------->Sid2: 3
+------->Dpid2: ce-f9-41-c6-aa-4a
+------->Port2: 1
+########################################################
+Discovered new link:
+--->Link:
+------->Name: s1_s2
+------->Sid1: 2
+------->Dpid1: 6e-5d-03-09-91-47
+------->Port1: 1
+------->Sid2: 1
+------->Dpid2: e6-af-e4-89-d4-43
+------->Port2: 1
+########################################################
+Discovered new link:
+--->Link:
+------->Name: s1_s4
+------->Sid1: 2
+------->Dpid1: 6e-5d-03-09-91-47
+------->Port1: 2
+------->Sid2: 4
+------->Dpid2: 2a-c4-e4-3c-c7-4b
+------->Port2: 2
+########################################################
+Discovered new link:
+--->Link:
+------->Name: s3_s4
+------->Sid1: 3
+------->Dpid1: ce-f9-41-c6-aa-4a
+------->Port1: 2
+------->Sid2: 4
+------->Dpid2: 2a-c4-e4-3c-c7-4b
+------->Port2: 1
+########################################################
+Discovered new link:
+--->Link:
+------->Name: s3_s2
+------->Sid1: 3
+------->Dpid1: ce-f9-41-c6-aa-4a
+------->Port1: 1
+------->Sid2: 1
+------->Dpid2: e6-af-e4-89-d4-43
+------->Port2: 2
+########################################################
+Discovered new link:
+--->Link:
+------->Name: s4_s1
+------->Sid1: 4
+------->Dpid1: 2a-c4-e4-3c-c7-4b
+------->Port1: 2
+------->Sid2: 2
+------->Dpid2: 6e-5d-03-09-91-47
+------->Port2: 2
+########################################################
+Discovered new link:
+--->Link:
+------->Name: s4_s3
+------->Sid1: 4
+------->Dpid1: 2a-c4-e4-3c-c7-4b
+------->Port1: 1
+------->Sid2: 3
+------->Dpid2: ce-f9-41-c6-aa-4a
+------->Port2: 2
+s4_s1
+s4_s3
+True
+A mobile connected to s4, on the interface 3
+Graph with 4 nodes and 4 edges
+s4-s1-s2
+I am link:  s4_s1 2 2
+I'm the first one
+Adding all the missing rules
+I am link:  s1_s2 1 1
+I'm the last one
+Adding all the missing rules
+s3_s4
+s3_s2
+True
+A mobile connected to s3, on the interface 4
+Graph with 4 nodes and 4 edges
+s3-s4-s1-s2
+I'm s4 and I'm the first of the previous path
+All the previous rules were deleted
+I am link:  s3_s4 2 1
+I'm the first one
+Only post switch in previous path
+I am link:  s4_s1 2 2
+Bot in previous path
+I am link:  s1_s2 1 1
+Bot in previous path
+s4_s1
+s4_s3
+True
+A mobile connected to s4, on the interface 3
+Graph with 4 nodes and 4 edges
+s4-s1-s2
+I'm s3 and I'm the first of the previous path
+I'm s3 and I'm not in the new path
+All the previous rules were deleted
+I am link:  s4_s1 2 2
+I'm the first one
+Bot in previous path
+I am link:  s1_s2 1 1
+Bot in previous path
+s3_s4
+s3_s2
+True
+A mobile connected to s3, on the interface 4
+Graph with 4 nodes and 4 edges
+s3-s4-s1-s2
+I'm s4 and I'm the first of the previous path
+All the previous rules were deleted
+I am link:  s3_s4 2 1
+I'm the first one
+Only post switch in previous path
+I am link:  s4_s1 2 2
+Bot in previous path
+I am link:  s1_s2 1 1
+Bot in previous path
+s4_s1
+s4_s3
+True
+A mobile connected to s4, on the interface 3
+Graph with 4 nodes and 4 edges
+s4-s1-s2
+I'm s3 and I'm the first of the previous path
+I'm s3 and I'm not in the new path
+All the previous rules were deleted
+I am link:  s4_s1 2 2
+I'm the first one
+Bot in previous path
+I am link:  s1_s2 1 1
+Bot in previous path
+s4_s1
+s4_s3
+True
