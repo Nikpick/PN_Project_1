@@ -20,21 +20,70 @@ class Link():
 		self.port2 = int(port2)
 	
 	def __str__(self):
-		return f"--->Link:\n------->Name: {self.name}\n------->Sid1: {self.sid1}\n------->Dpid1: {self.dpid1}\n------->Port1: {self.port1}\n------->Sid2: {self.sid2}\n------->Dpid2: {self.dpid2}\n------->Port2: {self.port2}"
+
+		# Split the string containing the switches names into two parts using the underscore as the delimiter
+		part1, part2 = self.name.split('_')
+
+		link_info = f"""
+-------------------------------------------------------------------
+|                              LINK                               |
+-------------------------------------------------------------------
+|         {part1}         ========================>         {part2}         |
+-------------------------------------------------------------------
+| SID1 |      DPID1      | PORT1 | SID2 |      DPID2      | PORT2 |
+-------------------------------------------------------------------
+|   {self.sid1}  |{self.dpid1}|   {self.port1}   |   {self.sid2}  |{self.dpid2}|   {self.port2}   |
+-------------------------------------------------------------------
+"""
+		return link_info
 
 class Switch():
 	def __init__(self, dpid, name, sid, ports=[]):
 		self.dpid = dpid
 		self.name = name
-		self.sid= sid
-		self.ports = ports
+		self.sid = sid
+		self.ports = ports if ports is not None else []
 
 	def port_to_string(self, port):
-		return f"------->Port:\n----------->Name: {port.name}\n----------->Port No: {port.port_no}\n----------->HW Addr: {port.hw_addr}"
+		return f"|  {port.name.ljust(5)}  |     {str(port.port_no).center(12)}   |   {port.hw_addr.ljust(19)}   |"
 
 	def __str__(self):
-		ports_str = "\n".join([self.port_to_string(port) for port in self.ports])
-		return f"Switch:\n--->DPID: {self.dpid}\n--->Name: {self.name}\n--->Sid: {self.sid}\n--->Ports:\n{ports_str}"		
+		# Calculate the number of ports
+		num_ports = len(self.ports)
+	
+		# Formatting the switch and its interfaces for printing
+		switch_info = f"""
+---------------------------------------------------------
+|                        SWITCH                         |
+---------------------------------------------------------
+|        DPID        |  NAME  |   SID   | INTERFACES NO |
+---------------------------------------------------------
+|{self.dpid:18}  |   {self.name:4} | {self.sid:4}    |    {num_ports:5}      |
+---------------------------------------------------------
+---------------------------------------------------------
+|                     INTERFACES                        |
+---------------------------------------------------------
+|  NAME  |   INTERFACE  ID   |          HW ADDR         |
+---------------------------------------------------------"""
+
+		#Formatting the actual interfaces
+		for port in self.ports:
+			if "eth" in port.name:
+				switch_info += f"""
+|  {port.name:4}  |   {port.port_no:10}      |     {str(port.hw_addr):20} |
+---------------------------------------------------------"""
+				
+		#Formatting switch info
+		for port in self.ports:
+			if "s" in port.name:
+				switch_info += f"""
+---------------------------------------------------------
+|  NAME  |     PORT NO       |         HW ADDR          |
+---------------------------------------------------------
+|   {port.name:4} |    {port.port_no:10}     |     {str(port.hw_addr):20} |
+---------------------------------------------------------\n"""
+
+		return switch_info
 
 class linkDiscovery():
 
@@ -58,8 +107,8 @@ class linkDiscovery():
 		self.switch_id[self.id] = switch
 		self.install_flow_rule(event.dpid)
 		self.id += 1
-		print("########################################################")
-		print("New switch:")
+		print("####################################################################")
+		print("\n**INFO**: New SWITCH found:")
 		print(switch)
 
 	def _handle_PacketIn(self, event):
@@ -78,8 +127,8 @@ class linkDiscovery():
 			link = Link(switch1, switch2, dpid1, port1, dpid2, port2)
 			if link.name not in self.links:
 				self.links[link.name] = link
-				print("########################################################")
-				print("Discovered new link:")
+				print("####################################################################")
+				print("\n**INFO**: New LINK found:")
 				print(link)
 
 	def sendProbes(self):
@@ -142,7 +191,6 @@ class linkDiscovery():
 				adj[int(link.sid1)-1, int(link.sid2)-1] = 0.1
 
 		graph = nx.from_numpy_array(adj)
-		print(graph)
 		return graph
 
 def launch():

@@ -29,23 +29,33 @@ class User_mobility():
 				path_str +=  switch_id[p+1].name
 			else:
 				path_str += switch_id[p+1].name + "-"
-		print(path_str)
+
+		print(f"**INFO**: The path used in the connection is:\n")
+
+		parts = path_str.split('-')
+		connection_str = '======'.join(parts)
+		border = '-' * (len(connection_str) + 4)
+
+		# Print the formatted output
+		print(border)
+		print(f"| {connection_str} |")
+		print(border + "\n")
 
 		
 
 		#if there was a previous path before, at the first we remove the rule to the mobile and all rules that are not in the new path
 		if self.previous_path is not None:
 			old_first_switch = switch_id[self.previous_path[0]+1]
-			print("I'm " + old_first_switch.name +" and I'm the first of the previous path")
+			print("**INFO**: I'm " + old_first_switch.name +" and I'm the first of the previous path")
 			self.del_flow_rule(old_first_switch.dpid, True)
 
 			for p in self.previous_path:
 				if p not in path:
-					print("I'm " + switch_id[p+1].name + " and I'm not in the new path")
+					print("**INFO**: I'm " + switch_id[p+1].name + " and I'm not in the new path")
 					self.del_flow_rule(switch_id[p+1].dpid, True)
 					self.del_flow_rule(switch_id[p+1].dpid, False)
 
-			print("All the previous rules were deleted")
+			print("**INFO**: All the previous rules were deleted\n")
 
 
 		# Retrieve switches from the dictionary
@@ -62,24 +72,26 @@ class User_mobility():
 			out_port1 = link.port1
 			out_port2 = link.port2
 
-			print("I am link:  " + str(link_name) +" "+  str(link.port1) +" "+str(link.port2))
+			
+			#print("**INFO**: I am link:  " + str(link_name) +" "+  str(link.port1) +" "+str(link.port2))
 
 			if i == 0: #add to the first the address to the cabinet
-				print("I'm the first one")
+				print("**INFO**: This is the first link:")
 				self.add_flow_rule(pre_switch.dpid, event.interface, True)
 			if i == len(switches_in_path)-2 and not self.addedd: #add addressing to GW at last
-				print("I'm the last one")
+				print("**INFO**: This is the last link:")
 				for port in post_switch.ports:
 					if port.name == "eth3":
 						outport = port.port_no
 				self.add_flow_rule(post_switch.dpid, outport, False)
 				self.addedd = True
+			print(link)
 
 			if self.previous_path is not None:
 				
 				# Check whether pre_switch and post_switch are adjacent in the previous_path list
 				if (pre_switch.sid-1 in self.previous_path) and (post_switch.sid-1 in self.previous_path):
-					print("Bot in previous path")
+					print("**INFO**: Bot in previous path")
 					pre_index = self.previous_path.index(pre_switch.sid-1)
 					post_index = self.previous_path.index(post_switch.sid-1)
 					if post_index - pre_index == 1:
@@ -90,15 +102,15 @@ class User_mobility():
 					if (pre_switch.sid-1 in self.previous_path):
 						self.mod_flow_rule(pre_switch.dpid, out_port1 ,False) #if it is the first, change to gw
 						self.add_flow_rule(post_switch.dpid, out_port2 ,True)
-						print("Only pre switch in previous path")
+						print("**INFO**: Only pre switch in previous path")
 						continue
 					else:
 						self.mod_flow_rule(post_switch.dpid, out_port2 ,True) #if it is the second change to mobile
 						self.add_flow_rule(pre_switch.dpid, out_port1 ,False)
-						print("Only post switch in previous path")
+						print("**INFO**: Only post switch in previous path")
 						continue
 			
-			print("Adding all the missing rules")
+			print("**INFO**: Adding all the missing rules\n")
 			#if not add the return rules
 			self.add_flow_rule(pre_switch.dpid, out_port1 ,False)
 			self.add_flow_rule(post_switch.dpid, out_port2 ,True)
