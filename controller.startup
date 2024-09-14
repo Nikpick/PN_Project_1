@@ -6,7 +6,6 @@ pip install pox --break-system-packages
 pip install networkx --break-system-packages
 pip install numpy --break-system-packages
 
-touch start.sh
 echo "clear" >> start.sh
 echo "./home/pox/pox.py topology_discovery host_tracking fake_gateway user_mobility" >> start.sh
 

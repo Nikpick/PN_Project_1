@@ -1,0 +1,24 @@
+
+root@mobile:/# arp -a
+root@mobile:/# arping -c 3 10.0.2.1
+ARPING 10.0.2.1
+60 bytes from 00:00:00:00:00:01 (10.0.2.1): index=0 time=55.279 msec
+60 bytes from 00:00:00:00:00:01 (10.0.2.1): index=1 time=4.187 msec
+60 bytes from 00:00:00:00:00:01 (10.0.2.1): index=2 time=3.706 msec
+
+--- 10.0.2.1 statistics ---
+3 packets transmitted, 3 packets received,   0% unanswered (0 extra)
+rtt min/avg/max/std-dev = 3.706/21.058/55.279/24.199 ms
+root@mobile:/# arp -a
+root@mobile:/# ping 10.0.2.1 -c 3
+PING 10.0.2.1 (10.0.2.1) 56(84) bytes of data.
+64 bytes from 10.0.2.1: icmp_seq=1 ttl=64 time=8.27 ms
+64 bytes from 10.0.2.1: icmp_seq=2 ttl=64 time=2.33 ms
+64 bytes from 10.0.2.1: icmp_seq=3 ttl=64 time=0.711 ms
+
+--- 10.0.2.1 ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2010ms
+rtt min/avg/max/mdev = 0.711/3.768/8.268/3.249 ms
+root@mobile:/# arp -a
+? (10.0.2.1) at 00:00:00:00:00:01 [ether] on eth0
+
