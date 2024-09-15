@@ -1,3 +1,0 @@
-to execure run in the controller:
-
-./home/pox/pox.py topology_discovery host_tracking fake_gateway user_mobility
