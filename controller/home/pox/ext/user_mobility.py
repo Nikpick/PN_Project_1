@@ -55,7 +55,7 @@ class User_mobility():
 					self.del_flow_rule(switch_id[p+1].dpid, True)
 					self.del_flow_rule(switch_id[p+1].dpid, False)
 
-			print("**INFO**: All the previous rules were deleted\n")
+			print("**INFO**: All the rules of the switches not in the previous path (if any) were deleted\n")
 
 
 		# Retrieve switches from the dictionary
@@ -91,7 +91,7 @@ class User_mobility():
 				
 				# Check whether pre_switch and post_switch are adjacent in the previous_path list
 				if (pre_switch.sid-1 in self.previous_path) and (post_switch.sid-1 in self.previous_path):
-					print("**INFO**: Bot in previous path")
+					print("**INFO**: Both in previous path")
 					pre_index = self.previous_path.index(pre_switch.sid-1)
 					post_index = self.previous_path.index(post_switch.sid-1)
 					if post_index - pre_index == 1:
@@ -102,12 +102,12 @@ class User_mobility():
 					if (pre_switch.sid-1 in self.previous_path):
 						self.mod_flow_rule(pre_switch.dpid, out_port1 ,False) #if it is the first, change to gw
 						self.add_flow_rule(post_switch.dpid, out_port2 ,True)
-						print("**INFO**: Only pre switch in previous path")
+						print(f"**INFO**: Only {pre_switch.name} switch in previous path")
 						continue
 					else:
 						self.mod_flow_rule(post_switch.dpid, out_port2 ,True) #if it is the second change to mobile
 						self.add_flow_rule(pre_switch.dpid, out_port1 ,False)
-						print("**INFO**: Only post switch in previous path")
+						print(f"**INFO**: Only {post_switch.name} switch in previous path")
 						continue
 			
 			print("**INFO**: Adding all the missing rules\n")
